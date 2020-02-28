@@ -1,4 +1,6 @@
-# flutter_visual
+# flutter_get_user
+
+Api is obtain from https://jsonplaceholder.typicode.com/users
 
 A new Flutter project.
 
