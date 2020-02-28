@@ -32,6 +32,7 @@ dev_dependencies:
   freezed:
   build_runner:  
   json_serializable:
+  bloc_test:
 
 
 # For information on the generic Dart part of this file, see the

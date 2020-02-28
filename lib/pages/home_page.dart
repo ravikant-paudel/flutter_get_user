@@ -61,7 +61,9 @@ class _CardItem extends StatelessWidget {
           child: Row(
             children: <Widget>[
               CircleAvatar(
-                child: Text(user.name.substring(0, 1)),
+                child: Text(
+                  user.name.substring(0, 1),
+                ),
               ),
               SizedBox(
                 width: 16.0,

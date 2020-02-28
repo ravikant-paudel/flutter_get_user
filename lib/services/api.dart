@@ -1,20 +1,22 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
+import 'package:flutter_visual/utils/config.dart';
+import 'package:flutter_visual/utils/failure.dart';
+
+Dio _dio = Dio(
+  BaseOptions(baseUrl: Config.API_BASE_URL),
+);
 
 abstract class Api {
-  Dio _dio = Dio(
-    BaseOptions(baseUrl: 'https://jsonplaceholder.typicode.com'),
-  );
   Future<dynamic> fetch(String path) async {
     Response response;
     try {
       response = await _dio.get(path);
     } on DioError catch (e) {
       if (e.message.contains('SocketException'))
-        throw SocketException('No intternet');
+        throw Failure(e.message, type: FailureType.http);
     } catch (e) {
       print(' catch ' + e.toString());
+      throw Failure(e.toString());
     }
     return response.data;
   }
