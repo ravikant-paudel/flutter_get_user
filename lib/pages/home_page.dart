@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_visual/bloc/user_block/bloc.dart';
+import 'package:flutter_visual/models/user/user.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,74 +18,79 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("User List"),
+      appBar: AppBar(
+        title: Text("User List"),
+      ),
+      body: BlocBuilder<UserBlock, UserState>(
+        builder: (context, state) => state.when(
+          loading: () => Center(
+            child: CircularProgressIndicator(),
+          ),
+          loaded: (users) => ListView.builder(
+            itemCount: users.length,
+            itemBuilder: (context, index) => _CardItem(users[index]),
+          ),
+          failed: (message) => Text(message),
+          noInternet: () => Center(
+            child: Text('No Internet Connection.'),
+          ),
         ),
-        body: BlocBuilder<UserBlock, UserState>(
-          builder: (context, state) => state.when(
-              loading: () => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-              loaded: (user) => ListView.builder(
-                  itemCount: user.length,
-                  itemBuilder: (context, index) => Card(
-                        child: InkWell(
-                          onTap: () =>
-                              Scaffold.of(context).showSnackBar(SnackBar(
-                            duration: Duration(seconds: 1),
-                            content: Text('He is :${user[index].name}'),
-                          )),
-                          onDoubleTap: () =>
-                              Scaffold.of(context).showSnackBar(SnackBar(
-                            content:
-                                Text('Address is ${user[index].address.city}'),
-                          )),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: <Widget>[
-                                CircleAvatar(
-                                  child: Text(user[index].name.substring(0, 1)),
-                                ),
-                                SizedBox(
-                                  width: 16.0,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text.rich(
-                                      TextSpan(
-                                        text: 'His name is ',
-                                        children: [
-                                          TextSpan(
-                                            text: user[index].name,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
-                                        style: TextStyle(
-                                            fontStyle: FontStyle.italic),
-                                      ),
-                                    ),
-                                    // Text('Name :${user[index].name}'),
-                                    Text('Addree :${user[index].address.city}')
-                                  ],
-                                )
-                              ],
-                            ),
+      ),
+    );
+  }
+}
+
+class _CardItem extends StatelessWidget {
+  final User user;
+
+  const _CardItem(this.user);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: InkWell(
+        onTap: () => Scaffold.of(context).showSnackBar(SnackBar(
+          duration: Duration(seconds: 1),
+          content: Text('He is :${user.name}'),
+        )),
+        onDoubleTap: () => Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text('Address is ${user.address.city}'),
+        )),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: <Widget>[
+              CircleAvatar(
+                child: Text(user.name.substring(0, 1)),
+              ),
+              SizedBox(
+                width: 16.0,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text.rich(
+                    TextSpan(
+                      text: 'His name is ',
+                      children: [
+                        TextSpan(
+                          text: user.name,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      )
-                  //  ListTile(
-                  //   title: Text(user[index].name),
-                  //   subtitle: Text(user[index].address.city),
-                  //   leading: CircleAvatar(
-                  //     child: Text(user[index].name.substring(0, 1)),
-                  //   ),
-                  // ),
+                      ],
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
                   ),
-              failed: (message) => Text(message),
-              noInternet: () => Center(child: Text('No Internet Connection.'))),
-        ));
+                  // Text('Name :${user.name}'),
+                  Text('Addree :${user.address.city}')
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
