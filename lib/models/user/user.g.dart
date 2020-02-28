@@ -6,8 +6,8 @@ part of 'user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return User(
+_$_User _$_$_UserFromJson(Map<String, dynamic> json) {
+  return _$_User(
     id: json['id'] as int,
     name: json['name'] as String,
     username: json['username'] as String,
@@ -23,7 +23,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+Map<String, dynamic> _$_$_UserToJson(_$_User instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'username': instance.username,
@@ -34,8 +34,8 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'company': instance.company,
     };
 
-Address _$AddressFromJson(Map<String, dynamic> json) {
-  return Address(
+_$_Address _$_$_AddressFromJson(Map<String, dynamic> json) {
+  return _$_Address(
     street: json['street'] as String,
     suite: json['suite'] as String,
     city: json['city'] as String,
@@ -46,7 +46,8 @@ Address _$AddressFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$AddressToJson(Address instance) => <String, dynamic>{
+Map<String, dynamic> _$_$_AddressToJson(_$_Address instance) =>
+    <String, dynamic>{
       'street': instance.street,
       'suite': instance.suite,
       'city': instance.city,
@@ -54,27 +55,28 @@ Map<String, dynamic> _$AddressToJson(Address instance) => <String, dynamic>{
       'geo': instance.geo,
     };
 
-Geo _$GeoFromJson(Map<String, dynamic> json) {
-  return Geo(
+_$_Geo _$_$_GeoFromJson(Map<String, dynamic> json) {
+  return _$_Geo(
     lat: json['lat'] as String,
     lng: json['lng'] as String,
   );
 }
 
-Map<String, dynamic> _$GeoToJson(Geo instance) => <String, dynamic>{
+Map<String, dynamic> _$_$_GeoToJson(_$_Geo instance) => <String, dynamic>{
       'lat': instance.lat,
       'lng': instance.lng,
     };
 
-Company _$CompanyFromJson(Map<String, dynamic> json) {
-  return Company(
+_$_Company _$_$_CompanyFromJson(Map<String, dynamic> json) {
+  return _$_Company(
     name: json['name'] as String,
     catchPhrase: json['catchPhrase'] as String,
     bs: json['bs'] as String,
   );
 }
 
-Map<String, dynamic> _$CompanyToJson(Company instance) => <String, dynamic>{
+Map<String, dynamic> _$_$_CompanyToJson(_$_Company instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'catchPhrase': instance.catchPhrase,
       'bs': instance.bs,

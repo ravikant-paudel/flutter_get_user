@@ -1,75 +1,57 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'user.freezed.dart';
 
 part 'user.g.dart';
 
-@JsonSerializable()
-class User {
-    final int id;
-    final String name;
-    final String username;
-    final String email;
-    final Address address;
-    final String phone;
-    final String website;
-    final Company company;
+@freezed
+abstract class User with _$User {
+  factory User({
+    int id,
+    String name,
+    String username,
+    String email,
+    Address address,
+    String phone,
+    String website,
+    Company company,
+  }) = _User;
 
-    User({
-        this.id,
-        this.name,
-        this.username,
-        this.email,
-        this.address,
-        this.phone,
-        this.website,
-        this.company,
-    });
-
-    factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
 
-@JsonSerializable()
-class Address {
-    final String street;
-    final String suite;
-    final String city;
-    final String zipcode;
-    final Geo geo;
+@freezed
+abstract class Address with _$Address {
+  factory Address({
+    String street,
+    String suite,
+    String city,
+    String zipcode,
+    Geo geo,
+  }) = _Address;
 
-    Address({
-        this.street,
-        this.suite,
-        this.city,
-        this.zipcode,
-        this.geo,
-    });
-
-    factory Address.fromJson(Map<String, dynamic> json) => _$AddressFromJson(json);
+  factory Address.fromJson(Map<String, dynamic> json) =>
+      _$AddressFromJson(json);
 }
 
-@JsonSerializable()
-class Geo {
-    final String lat;
-    final String lng;
+@freezed
+abstract class Geo with _$Geo {
+  factory Geo({
+    String lat,
+    String lng,
+  }) = _Geo;
 
-    Geo({
-        this.lat,
-        this.lng,
-    });
-
-    factory Geo.fromJson(Map<String, dynamic> json) => _$GeoFromJson(json);
+  factory Geo.fromJson(Map<String, dynamic> json) => _$GeoFromJson(json);
 }
 
-@JsonSerializable()
-class Company {
-    final String name;
-    final String catchPhrase;
-    final String bs;
+@freezed
+abstract class Company with _$Company {
+  factory Company({
+    String name,
+    String catchPhrase,
+    String bs,
+  }) = _Company;
 
-    Company({
-        this.name,
-        this.catchPhrase,
-        this.bs,
-    });
-
-    factory Company.fromJson(Map<String, dynamic> json) => _$CompanyFromJson(json);
+  factory Company.fromJson(Map<String, dynamic> json) =>
+      _$CompanyFromJson(json);
 }

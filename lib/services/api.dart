@@ -12,10 +12,13 @@ abstract class Api {
     try {
       response = await _dio.get(path);
     } on DioError catch (e) {
+      print('DioError ' + e.message.toString());
       if (e.message.contains('SocketException'))
-        throw Failure(e.message, type: FailureType.http);
+        throw Failure('No Internet', type: FailureType.http);
+      else
+        throw Failure(e.message, type: FailureType.network);
     } catch (e) {
-      print(' catch ' + e.toString());
+      print('Other catch ' + e.toString());
       throw Failure(e.toString());
     }
     return response.data;
